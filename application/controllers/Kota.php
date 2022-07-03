@@ -7,6 +7,7 @@ class Kota extends AUTH_Controller {
 		$this->load->model('M_kota');
 	}
 
+	//membuat variabel data yang menampung nilai array
 	public function index() {
 		$data['userdata'] 	= $this->userdata;
 		$data['dataKota'] 	= $this->M_kota->select_all();
@@ -20,11 +21,13 @@ class Kota extends AUTH_Controller {
 		$this->template->views('kota/home', $data);
 	}
 
+	//menampilkan list kota yang sudah diisi
 	public function tampil() {
 		$data['dataKota'] = $this->M_kota->select_all();
 		$this->load->view('kota/list_data', $data);
 	}
 
+	//melakukan penambahan list kota yang nanti disimpan dalam table
 	public function prosesTambah() {
 		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
 
@@ -47,6 +50,7 @@ class Kota extends AUTH_Controller {
 		echo json_encode($out);
 	}
 
+	//mengambil data kota yang sudah pernah diinput
 	public function update() {
 		$data['userdata'] 	= $this->userdata;
 
@@ -56,6 +60,7 @@ class Kota extends AUTH_Controller {
 		echo show_my_modal('modals/modal_update_kota', 'update-kota', $data);
 	}
 
+	//melakukan proses update jika ada data yang harus diganti
 	public function prosesUpdate() {
 		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
 
@@ -78,6 +83,7 @@ class Kota extends AUTH_Controller {
 		echo json_encode($out);
 	}
 
+	//melakukan delete kota jika pada kota tersebut sudah tidak ada pegawai yang tinggal
 	public function delete() {
 		$id = $_POST['id'];
 		$result = $this->M_kota->delete($id);

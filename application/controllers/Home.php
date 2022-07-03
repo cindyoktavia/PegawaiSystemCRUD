@@ -9,6 +9,7 @@ class Home extends AUTH_Controller {
 		$this->load->model('M_kota');
 	}
 
+	//menampilkan data yang ada pada table
 	public function index() {
 		$data['jml_pegawai'] 	= $this->M_pegawai->total_rows();
 		$data['jml_posisi'] 	= $this->M_posisi->total_rows();

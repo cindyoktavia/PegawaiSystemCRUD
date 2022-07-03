@@ -7,6 +7,7 @@ class Auth extends CI_Controller {
 		$this->load->model('M_auth');
 	}
 	
+	//melakukan direct ke home saat url dibuka
 	public function index() {
 		$session = $this->session->userdata('status');
 
@@ -17,10 +18,12 @@ class Auth extends CI_Controller {
 		}
 	}
 
+	//melakukan validasi login
 	public function login() {
 		$this->form_validation->set_rules('username', 'Username', 'required|min_length[4]|max_length[15]');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 
+		//menerapkan kondisi apabila login berhasil dan gagal
 		if ($this->form_validation->run() == TRUE) {
 			$username = trim($_POST['username']);
 			$password = trim($_POST['password']);
@@ -44,6 +47,7 @@ class Auth extends CI_Controller {
 		}
 	}
 
+	//menerapkan fungsi logout yang menggunakan session destroy
 	public function logout() {
 		$this->session->sess_destroy();
 		redirect('Auth');
